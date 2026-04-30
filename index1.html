@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Георгий Хасиев — Балет и движение</title>
+  <meta name="description" content="Индивидуальные тренировки на основе балетной техники. Онлайн, под тебя, с реальным результатом.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg: #f9f8f5;
+      --color-surface: #f4f2ed;
+      --color-text: #1c1a16;
+      --color-text-muted: #6b6760;
+      --color-text-faint: #b0aea8;
+      --color-divider: #dedad3;
+      --color-accent: #1c1a16;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-24: 6rem;
+      --space-32: 8rem;
+      --max-width: 1200px;
+      --radius: 2px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: var(--space-4) var(--space-8);
+      background: rgba(249,248,245,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-divider);
+    }
+    .nav-brand {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--color-text);
+      text-decoration: none;
+      line-height: 1.2;
+    }
+    .nav-brand span {
+      display: block;
+      font-size: 0.7rem;
+      font-family: var(--font-body);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+    .nav-cta {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-text);
+      padding-bottom: 2px;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.6; }
+
+    /* HERO — fullscreen with overlay promo */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+    }
+    .hero-photo {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.65) 100%);
+    }
+    .hero-content {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: var(--space-16) var(--space-8) var(--space-12);
+      color: #fff;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: flex-end;
+      gap: var(--space-8);
+    }
+    .hero-text {}
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: var(--space-4);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-4);
+    }
+    .hero-title em {
+      font-style: italic;
+      font-weight: 300;
+    }
+    .hero-subtitle {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.04em;
+    }
+
+    /* PROMO BADGE */
+    .hero-promo {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 4px;
+      padding: var(--space-6) var(--space-8);
+      color: #fff;
+      text-align: center;
+      min-width: 200px;
+      flex-shrink: 0;
+    }
+    .promo-tag {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: var(--space-2);
+    }
+    .promo-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.2;
+      margin-bottom: var(--space-2);
+    }
+    .promo-desc {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.4;
+      margin-bottom: var(--space-4);
+    }
+    .promo-cta {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.6);
+      padding: var(--space-2) var(--space-4);
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .promo-cta:hover { background: rgba(255,255,255,0.2); }
+
+    /* SECTION WRAPPER */
+    .section { padding: var(--space-24) var(--space-8); }
+    .section-inner { max-width: var(--max-width); margin: 0 auto; }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-6);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-6);
+    }
+    .section-title em { font-style: italic; }
+    .section-lead {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+    .divider {
+      width: 40px; height: 1px;
+      background: var(--color-divider);
+      margin: var(--space-8) 0;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+    .about-facts { margin-top: var(--space-8); }
+    .fact-item {
+      display: flex;
+      gap: var(--space-6);
+      padding: var(--space-6) 0;
+      border-bottom: 1px solid var(--color-divider);
+    }
+    .fact-item:first-child { border-top: 1px solid var(--color-divider); }
+    .fact-number {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--color-text-faint);
+      min-width: 60px;
+    }
+    .fact-text {}
+    .fact-title {
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: var(--space-1);
+    }
+    .fact-desc {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      font-weight: 300;
+    }
+    .about-image { position: relative; }
+    .about-image img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* LESSON CONTENT — left text, right photo */
+    .lesson-section { background: var(--color-surface); }
+    .lesson-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+    .lesson-items { margin-top: var(--space-8); }
+    .lesson-item {
+      padding: var(--space-5) 0;
+      border-bottom: 1px solid var(--color-divider);
+      display: flex;
+      gap: var(--space-4);
+      align-items: flex-start;
+    }
+    .lesson-item:first-child { border-top: 1px solid var(--color-divider); }
+    .lesson-num {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--color-text-faint);
+      min-width: 24px;
+      padding-top: 2px;
+    }
+    .lesson-item-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+    .lesson-item-desc {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .lesson-photo img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* WHY ONLINE */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+      margin-top: var(--space-12);
+    }
+    .why-card {
+      padding: var(--space-8);
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius);
+    }
+    .why-icon {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-style: italic;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-4);
+      line-height: 1;
+    }
+    .why-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: var(--space-2);
+    }
+    .why-desc {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* REVIEWS */
+    .reviews-section { background: var(--color-surface); }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+      margin-top: var(--space-12);
+    }
+    .review-card {
+      background: var(--color-bg);
+      border-radius: 4px;
+      padding: var(--space-8);
+    }
+    .review-avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--color-divider);
+      margin-bottom: var(--space-4);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--color-text-muted);
+      overflow: hidden;
+    }
+    .review-avatar-placeholder {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--color-divider);
+      margin-bottom: var(--space-4);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--color-text-muted);
+    }
+    .review-text {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--color-text);
+      font-weight: 300;
+      margin-bottom: var(--space-4);
+      font-style: italic;
+    }
+    .review-author {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .review-city {
+      font-size: 0.72rem;
+      color: var(--color-text-muted);
+      font-weight: 300;
+    }
+
+    /* PRICING */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+      margin-top: var(--space-12);
+    }
+    .pricing-card {
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius);
+      padding: var(--space-8);
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .pricing-card.featured {
+      border-color: var(--color-text);
+      background: var(--color-text);
+      color: #fff;
+    }
+    .pricing-tag {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-4);
+    }
+    .pricing-card.featured .pricing-tag { color: rgba(255,255,255,0.5); }
+    .pricing-amount {
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: var(--space-1);
+    }
+    .pricing-per {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      font-weight: 300;
+      margin-bottom: var(--space-2);
+    }
+    .pricing-card.featured .pricing-per { color: rgba(255,255,255,0.6); }
+    .pricing-total {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-6);
+      border-bottom: 1px solid var(--color-divider);
+    }
+    .pricing-card.featured .pricing-total {
+      color: rgba(255,255,255,0.7);
+      border-bottom-color: rgba(255,255,255,0.2);
+    }
+    .pricing-saving {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: #e8f4e8;
+      color: #2d6a2d;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-bottom: var(--space-6);
+    }
+    .pricing-card.featured .pricing-saving {
+      background: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.9);
+    }
+    .pricing-features {
+      list-style: none;
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+    }
+    .pricing-card.featured .pricing-features { color: rgba(255,255,255,0.75); }
+    .pricing-features li::before {
+      content: "—";
+      margin-right: var(--space-2);
+      color: var(--color-text-faint);
+    }
+    .pricing-card.featured .pricing-features li::before { color: rgba(255,255,255,0.4); }
+    .pricing-book {
+      display: block;
+      margin-top: var(--space-8);
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: var(--space-3) var(--space-6);
+      border: 1px solid var(--color-text);
+      color: var(--color-text);
+      border-radius: var(--radius);
+      transition: all 0.2s;
+    }
+    .pricing-book:hover { background: var(--color-text); color: #fff; }
+    .pricing-card.featured .pricing-book {
+      border-color: rgba(255,255,255,0.5);
+      color: #fff;
+    }
+    .pricing-card.featured .pricing-book:hover { background: rgba(255,255,255,0.15); }
+    .pricing-note {
+      margin-top: var(--space-8);
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      font-weight: 300;
+      text-align: center;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--color-text);
+      color: rgba(255,255,255,0.7);
+      padding: var(--space-12) var(--space-8);
+    }
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--space-8);
+    }
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: #fff;
+      margin-bottom: var(--space-2);
+    }
+    .footer-sub {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--space-2);
+    }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #fff; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: var(--space-3) var(--space-4); }
+      .hero-content {
+        grid-template-columns: 1fr;
+        padding: var(--space-8) var(--space-4) var(--space-8);
+      }
+      .hero-promo { min-width: auto; }
+      .section { padding: var(--space-16) var(--space-4); }
+      .about-grid, .lesson-grid { grid-template-columns: 1fr; }
+      .lesson-photo { order: -1; }
+      .why-grid, .reviews-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-links { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    Георгий Хасиев
+    <span>Преподаватель балета</span>
+  </a>
+  <a href="https://calendly.com/gosha-khasiev/online-ballet-class-with-georgy" target="_blank" class="nav-cta">Записаться</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="./photo3.jpg" alt="Георгий ведёт занятие по балетной технике" class="hero-photo" width="1200" height="800" loading="eager">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Онлайн · Весь мир</p>
+      <h1 class="hero-title">Балет и<br><em>движение</em></h1>
+      <p class="hero-subtitle">Индивидуальные занятия с профессиональным танцовщиком</p>
+    </div>
+    <div class="hero-promo">
+      <p class="promo-tag">Только в мае</p>
+      <p class="promo-title">2 занятия<br>за 50€</p>
+      <p class="promo-desc">Вместо 100€ — познакомимся и выстроим твой маршрут</p>
+      <a href="https://calendly.com/gosha-khasiev/online-ballet-class-with-georgy" target="_blank" class="promo-cta">Записаться</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <p class="section-label">О методе</p>
+        <h2 class="section-title">Балетная техника —<br><em>для любого тела</em></h2>
+        <p class="section-lead">Я не работаю по шаблону. Каждое занятие строится под тебя — твою цель, твоё тело, твой уровень. Балетная техника здесь — инструмент, а не самоцель.</p>
+        <div class="divider"></div>
+        <div class="about-facts">
+          <div class="fact-item">
+            <div class="fact-number">10+</div>
+            <div class="fact-text">
+              <div class="fact-title">Лет на профессиональной сцене</div>
+              <div class="fact-desc">Государственные театры России и Европы</div>
+            </div>
+          </div>
+          <div class="fact-item">
+            <div class="fact-number">200+</div>
+            <div class="fact-text">
+              <div class="fact-title">Учеников по всему миру</div>
+              <div class="fact-desc">Берлин, Лондон, Тель-Авив, Нью-Йорк, Дубай</div>
+            </div>
+          </div>
+          <div class="fact-item">
+            <div class="fact-number">1:1</div>
+            <div class="fact-text">
+              <div class="fact-title">Только индивидуально</div>
+              <div class="fact-desc">Никаких групп — только личная работа</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-image">
+        <img src="./photo1.jpg" alt="Работа у станка" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON CONTENT -->
+<section class="section lesson-section">
+  <div class="section-inner">
+    <div class="lesson-grid">
+      <div>
+        <p class="section-label">Структура занятия</p>
+        <h2 class="section-title">Из чего <em>состоит</em><br>занятие</h2>
+        <p class="section-lead">Каждый урок — законченная единица работы с телом. Мы не повторяем — мы строим.</p>
+        <div class="lesson-items">
+          <div class="lesson-item">
+            <span class="lesson-num">01</span>
+            <div>
+              <div class="lesson-item-title">Разогрев и настройка</div>
+              <div class="lesson-item-desc">Работа с дыханием, суставами и осью тела. Подготовка к нагрузке без травм.</div>
+            </div>
+          </div>
+          <div class="lesson-item">
+            <span class="lesson-num">02</span>
+            <div>
+              <div class="lesson-item-title">Экзерсис у станка</div>
+              <div class="lesson-item-desc">Базовые упражнения балетного класса — адаптированные под твой уровень и задачи.</div>
+            </div>
+          </div>
+          <div class="lesson-item">
+            <span class="lesson-num">03</span>
+            <div>
+              <div class="lesson-item-title">Работа в центре зала</div>
+              <div class="lesson-item-desc">Равновесие, координация, чувство пространства. Без опоры — только ты и тело.</div>
+            </div>
+          </div>
+          <div class="lesson-item">
+            <span class="lesson-num">04</span>
+            <div>
+              <div class="lesson-item-title">Акцент дня</div>
+              <div class="lesson-item-desc">Конкретная задача: осанка, растяжка, прыжки, руки — то, что нужно именно тебе.</div>
+            </div>
+          </div>
+          <div class="lesson-item">
+            <span class="lesson-num">05</span>
+            <div>
+              <div class="lesson-item-title">Разбор и обратная связь</div>
+              <div class="lesson-item-desc">Объясняю что получилось, что нет и что делать дома до следующего занятия.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lesson-photo">
+        <img src="./photo2.jpg" alt="Работа с руками на занятии" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ONLINE -->
+<section class="section">
+  <div class="section-inner">
+    <p class="section-label">Формат</p>
+    <h2 class="section-title">Почему онлайн —<br><em>не компромисс</em></h2>
+    <p class="section-lead">Онлайн-формат — это не хуже. Это по-другому. И часто — лучше.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">I</div>
+        <div class="why-title">Камера видит тебя целиком</div>
+        <div class="why-desc">Я вижу твоё тело в полный рост — лучше, чем вижу учеников в зале, где обзор ограничен.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">II</div>
+        <div class="why-title">Ты занимаешься дома</div>
+        <div class="why-desc">Никакого стресса от незнакомой студии, чужих взглядов и неудобной одежды. Твоё пространство.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">III</div>
+        <div class="why-title">Запись остаётся у тебя</div>
+        <div class="why-desc">По желанию записываем урок — можно пересмотреть, повторить упражнения, не потерять прогресс.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">IV</div>
+        <div class="why-title">Только ты и педагог</div>
+        <div class="why-desc">Ни одной лишней секунды не тратится на других. Всё занятие — про тебя.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">V</div>
+        <div class="why-title">Никакой географии</div>
+        <div class="why-desc">Ты в Берлине, Лондоне или Токио — не важно. Мы занимаемся, когда тебе удобно.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">VI</div>
+        <div class="why-title">Гибкое расписание</div>
+        <div class="why-desc">Подстраиваюсь под твой график. Рано утром, поздно вечером — найдём время.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section reviews-section">
+  <div class="section-inner">
+    <p class="section-label">Отзывы</p>
+    <h2 class="section-title">Что говорят <em>ученики</em></h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-avatar-placeholder">А</div>
+        <p class="review-text">«Я занималась балетом в детстве, потом 15 лет перерыв. Георгий помог вернуться без страха — постепенно, без боли, с удовольствием. Уже через месяц чувствую спину совсем иначе.»</p>
+        <div class="review-author">Анна</div>
+        <div class="review-city">Берлин, Германия</div>
+      </div>
+      <div class="review-card">
+        <div class="review-avatar-placeholder">М</div>
+        <p class="review-text">«Думала, онлайн — это несерьёзно. Оказалось наоборот: Георгий замечает каждую деталь, объясняет точно и понятно. За три месяца я изменила осанку — это видно на фото.»</p>
+        <div class="review-author">Мария</div>
+        <div class="review-city">Тель-Авив, Израиль</div>
+      </div>
+      <div class="review-card">
+        <div class="review-avatar-placeholder">Е</div>
+        <p class="review-text">«Я профессиональный танцор, но хотела поработать над техникой именно с балетным педагогом. Занятия с Георгием дали мне совершенно другой взгляд на собственное тело.»</p>
+        <div class="review-author">Екатерина</div>
+        <div class="review-city">Лондон, Великобритания</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section">
+  <div class="section-inner">
+    <p class="section-label">Условия</p>
+    <h2 class="section-title">Стоимость <em>занятий</em></h2>
+    <p class="section-lead">Одно занятие длится 55 минут. Чем больше занятий берёшь — тем выгоднее.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-tag">1 занятие</div>
+        <div class="pricing-amount">50<span style="font-size:1.4rem">€</span></div>
+        <div class="pricing-per">за занятие</div>
+        <div class="pricing-total">Итого: 50€</div>
+        <ul class="pricing-features">
+          <li>55 минут работы 1:1</li>
+          <li>Программа под тебя</li>
+          <li>Обратная связь</li>
+        </ul>
+        <a href="https://calendly.com/gosha-khasiev/online-ballet-class-with-georgy" target="_blank" class="pricing-book">Записаться</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-tag">4 занятия</div>
+        <div class="pricing-amount">40<span style="font-size:1.4rem">€</span></div>
+        <div class="pricing-per">за занятие</div>
+        <div class="pricing-total">Итого: 160€</div>
+        <span class="pricing-saving">Экономия 20%</span>
+        <ul class="pricing-features">
+          <li>55 минут работы 1:1</li>
+          <li>Программа на месяц</li>
+          <li>Прогресс между занятиями</li>
+          <li>Обратная связь</li>
+        </ul>
+        <a href="https://calendly.com/gosha-khasiev/online-ballet-class-with-georgy" target="_blank" class="pricing-book">Записаться</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-tag">8 занятий</div>
+        <div class="pricing-amount">37<span style="font-size:1.4rem">€</span></div>
+        <div class="pricing-per">за занятие · 37,5€ точно</div>
+        <div class="pricing-total">Итого: 300€</div>
+        <span class="pricing-saving">Экономия 25%</span>
+        <ul class="pricing-features">
+          <li>55 минут работы 1:1</li>
+          <li>Программа на 2 месяца</li>
+          <li>Работа над конкретными целями</li>
+          <li>Приоритет в расписании</li>
+          <li>Обратная связь</li>
+        </ul>
+        <a href="https://calendly.com/gosha-khasiev/online-ballet-class-with-georgy" target="_blank" class="pricing-book">Записаться</a>
+      </div>
+    </div>
+    <p class="pricing-note">Оплата перед блоком занятий. Перенос урока — не позднее чем за 24 часа.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Георгий Хасиев</div>
+      <div class="footer-sub">Преподаватель балета · Онлайн · Весь мир</div>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:gosha.khasiev@gmail.com">gosha.khasiev@gmail.com</a>
+      <a href="https://instagram.com/goshakhas" target="_blank">Instagram</a>
+      <a href="https://calendly.com/gosha-khasiev/online-ballet-class-with-georgy" target="_blank">Записаться на занятие</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
